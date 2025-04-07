@@ -16,7 +16,7 @@ addons.register(ADDON_ID, (api) => {
   // Register a tool
   addons.add(TOOL_ID, {
     type: types.TOOL,
-    title: "My addon",
+    title: "Tool addon",
     match: ({ viewMode, tabId }) =>
       !!((viewMode && viewMode.match(/^(story)$/)) || tabId === TAB_ID),
     render: () => <Tool api={api} />,
@@ -25,7 +25,7 @@ addons.register(ADDON_ID, (api) => {
   // Register a panel
   addons.add(PANEL_ID, {
     type: types.PANEL,
-    title: "My addon",
+    title: "Panel addon xoxoxo",
     match: ({ viewMode }) => viewMode === "story",
     render: ({ active }) => <Panel active={active} />,
   });
@@ -33,7 +33,9 @@ addons.register(ADDON_ID, (api) => {
   // Register a tab
   addons.add(TAB_ID, {
     type: types.TAB,
-    title: "My addon",
-    render: ({ active }) => <Tab active={active} />,
+    title: "CSS",
+    route: ({ storyId }) => `/css/${storyId}`,
+    match: ({ viewMode }) => viewMode === "css",
+    render: Tab,
   });
 });

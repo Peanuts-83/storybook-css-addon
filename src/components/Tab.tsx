@@ -1,10 +1,11 @@
 import { LightningIcon } from "@storybook/icons";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Code, H1, IconButton, Link } from "storybook/internal/components";
-import { useGlobals, useParameter } from "storybook/internal/manager-api";
+import { useGlobals, useParameter, useStorybookState } from "storybook/internal/manager-api";
 import { styled } from "storybook/internal/theming";
 
 import { KEY } from "../constants";
+import { useCssViewer } from 'src/hooks/useCssViewer';
 
 interface TabProps {
   active: boolean;
@@ -24,21 +25,23 @@ const TabInner = styled.div({
 });
 
 export const Tab: React.FC<TabProps> = ({ active }) => {
+  // console.log('StorybookState:', useStorybookState())
+  const { storyId } = useStorybookState(); // Récupère l'ID de la story active
+  console.log(storyId)
+  const [cssContent, setCssContent] = useState<string | null>('');
   // https://storybook.js.org/docs/react/addons/addons-api#useparameter
   const config = useParameter<string>(
     KEY,
-    "fallback value of config from parameter",
+    "Aucun paramètre spécifique",
   );
 
   // https://storybook.js.org/docs/addons/addons-api#useglobals
-  const [globals, updateGlobals] = useGlobals();
-  const value = globals[KEY];
+  // const [globals, updateGlobals] = useGlobals();
+  // const value = globals[KEY];
 
-  const update = useCallback((newValue: typeof value) => {
-    updateGlobals({
-      [KEY]: newValue,
-    });
-  }, []);
+  const css = useCssViewer(storyId); // Assurez-vous que useCssViewer retourne une promesse ou une valeur
+  setCssContent(css);
+
 
   if (!active) {
     return null;
@@ -47,31 +50,14 @@ export const Tab: React.FC<TabProps> = ({ active }) => {
   return (
     <TabWrapper>
       <TabInner>
-        <H1>My Addon ({KEY})</H1>
-        <p>Your addon can create a custom tab in Storybook.</p>
-        <p>
-          You have full control over what content is being rendered here. You
-          can use components from{" "}
-          <Link href="https://github.com/storybookjs/storybook/blob/next/code/core/src/components/README.md">
-            storybook/internal/components
-          </Link>{" "}
-          to match the look and feel of Storybook, for example the{" "}
-          <code>&lt;Code /&gt;</code> component below. Or build a completely
-          custom UI.
-        </p>
-        <Code>{config}</Code>
-        <p>
-          You can also have interactive UI here, like a button that updates a
-          global:{" "}
-          <IconButton
-            active={!!value}
-            onClick={() => {
-              update(!value);
-            }}
-          >
-            <LightningIcon />
-          </IconButton>
-        </p>
+        <H1>CSS Viewer</H1>
+        <p>Voici le CSS du composant actif :</p>
+        {cssContent ? (
+          <Code>{cssContent}</Code>
+        ) : (
+          <p>Aucun CSS disponible pour ce composant.</p>
+        )}
+        <p>Paramètres personnalisés : {config}</p>
       </TabInner>
     </TabWrapper>
   );
