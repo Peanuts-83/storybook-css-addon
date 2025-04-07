@@ -1,17 +1,17 @@
 {
-  "name": "storybook-addon-kit",
+  "name": "storybook-addon-css-viewer",
   "version": "0.0.0",
-  "description": "everything you need to build a Storybook addon",
+  "description": "Display css/less file content linked to story's component in a TAB.",
   "keywords": [
-    "storybook-addons"
+    "storybook-addon css less viewer display tab", "storybook-addons"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/storybookjs/storybook-addon-kit"
+    "url": "https://github.com/Peanuts-83/storybook-css-addon.git"
   },
   "type": "module",
   "license": "MIT",
-  "author": "package-author",
+  "author": "thomas ranque <tranque@free.fr>",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -34,7 +34,6 @@
     "*.d.ts"
   ],
   "scripts": {
-    "postinstall": "node scripts/welcome.js",
     "build": "tsup",
     "build:watch": "npm run build -- --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -46,7 +45,8 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@storybook/icons": "^1.2.10"
+    "@storybook/icons": "^1.2.10",
+    "styled-components": "^6.1.17"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "0.0.0-pr-26654-sha-49d01553",
@@ -98,9 +98,9 @@
     ]
   },
   "storybook": {
-    "displayName": "Addon Kit",
+    "displayName": "Css Viewer",
     "supportedFrameworks": [
-      "supported-frameworks"
+      "react angular any"
     ],
     "icon": "https://user-images.githubusercontent.com/321738/63501763-88dbf600-c4cc-11e9-96cd-94adadc2fd72.png"
   }
