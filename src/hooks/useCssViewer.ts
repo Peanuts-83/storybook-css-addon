@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { cssViewerConfigs as cvc } from "../config/css-viewer-conf"; 
+
 
 export const useCssViewer = (componentId: string) => {
     const [css, setCss] = useState<string>("");
@@ -7,20 +9,36 @@ export const useCssViewer = (componentId: string) => {
         const fetchCss = async () => {
             try {
                 if (!componentId) {
-                    throw new Error('no componentId!')
+                    throw new Error('no story id !');
                 } else {
-                    console.log('id du compo ' + componentId + `, fichier less: "./assets/${componentId.split('-')[1]}.css"`)
+                    console.log('story id ' + componentId + `, style file name: "./assets/${cvc.prefix}${componentId.replace(cvc.ignorePrefix, "").split('--')[0]}.[ext]"`);
                 }
-                const response = await fetch(`./assets/${componentId.split('-')[1]}.css`);
-                if (!response.ok) {
-                    console.error(response)
-                    throw new Error(`Erreur lors du chargement du CSS : ${response.statusText}`);
+                const baseName = cvc.prefix + componentId.replace(cvc.ignorePrefix, "").split('--')[0];
+                const extensions = ['css', 'less', 'sass', 'scss', 'styl'];
+                let cssText = '';
+                let fileFound = false;
+
+                for (const ext of extensions) {
+                    try {
+                        const response = await fetch(`./assets/${cvc.prefix}${baseName}.${ext}`);
+                        if (response.ok) {
+                            cssText = await response.text();
+                            fileFound = true;
+                            break;
+                        }
+                    } catch (err) {
+                        console.warn(`Failed to fetch ./assets/${cvc.prefix}${baseName}.${ext}:`, err);
+                    }
                 }
-                const cssText = await response.text();
+
+                if (!fileFound) {
+                    throw new Error('No style file found for this story.');
+                }
+
                 setCss(cssText);
             } catch (error) {
-                console.error("Erreur lors de la récupération du CSS :", error);
-                setCss("Impossible de charger le CSS.");
+                console.error(error);
+                setCss("No style available for this story.");
             }
         };
 

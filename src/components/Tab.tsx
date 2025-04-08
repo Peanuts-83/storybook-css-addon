@@ -1,11 +1,8 @@
-import { LightningIcon } from "@storybook/icons";
-import React, { useCallback } from "react";
-import { Code, H1, IconButton, Link } from "storybook/internal/components";
-import { useGlobals, useParameter, useStorybookState } from "storybook/internal/manager-api";
+import React from "react";
+import { Code } from "storybook/internal/components";
+import { useStorybookState } from "storybook/internal/manager-api";
 import { styled } from "storybook/internal/theming";
-
-import { KEY } from "../constants";
-import { useCssViewer } from 'src/hooks/useCssViewer';
+import { useCssViewer } from '../hooks/useCssViewer';
 
 interface TabProps {
   active: boolean;
@@ -13,34 +10,34 @@ interface TabProps {
 
 const TabWrapper = styled.div(({ theme }) => ({
   background: theme.background.content,
-  padding: "4rem 20px",
   minHeight: "100vh",
   boxSizing: "border-box",
+  position: "absolute",
+  top: 0,
 }));
 
 const TabInner = styled.div({
   maxWidth: 768,
   marginLeft: "auto",
   marginRight: "auto",
+  marginTop: "4rem"
 });
 
-export const Tab: React.FC<TabProps> = ({ active }) => {
-  const { storyId } = useStorybookState(); // Récupère l'ID de la story active
-  const cssContent = useCssViewer(storyId); // Récupère le CSS du composant actif
+export const Tab: React.FC<TabProps> = ({active}) => {
+  const { storyId } = useStorybookState(); // Get active story ID
+  const cssContent = useCssViewer(storyId); // Get style
 
-  if (!active) {
+  if (!active || storyId.includes('introduction')) {
     return null;
   }
 
   return (
     <TabWrapper>
       <TabInner>
-        <H1>CSS Viewer</H1>
-        <p>Voici le CSS du composant actif :</p>
         {cssContent ? (
           <Code>{cssContent}</Code>
         ) : (
-          <p>Aucun CSS disponible pour ce composant.</p>
+          <p>No style available for this story.</p>
         )}
       </TabInner>
     </TabWrapper>

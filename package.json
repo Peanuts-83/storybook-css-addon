@@ -1,9 +1,9 @@
 {
   "name": "storybook-addon-css-viewer",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Display css/less file content linked to story's component in a TAB.",
   "keywords": [
-    "storybook-addon css less viewer display tab", "storybook-addons"
+    "storybook-addon", "css", "less", "viewer", "display", "tab", "storybook-addons"
   ],
   "repository": {
     "type": "git",
@@ -100,8 +100,8 @@
   "storybook": {
     "displayName": "Css Viewer",
     "supportedFrameworks": [
-      "react angular any"
+      "react angular"
     ],
-    "icon": "https://user-images.githubusercontent.com/321738/63501763-88dbf600-c4cc-11e9-96cd-94adadc2fd72.png"
+    "icon": "https://avatars.githubusercontent.com/u/74671565?v=4"
   }
 }

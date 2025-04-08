@@ -1,9 +1,12 @@
-import { Result } from "src/types";
+import { Result } from "./types";
 import { useEffect } from "storybook/internal/preview-api";
 import { useChannel } from "storybook/internal/preview-api";
 import type { DecoratorFunction } from "storybook/internal/types";
+import { CONFIG_FILE, EVENTS } from "./constants";
 
-import { EVENTS } from "./constants";
+const getParameter = (parameters: any, key: string, defaultValue: any) => {
+  return parameters[key] || defaultValue;
+};
 
 /**
  * This is an example of a function that performs some sort of analysis on the
@@ -26,6 +29,12 @@ const check = (canvas: ParentNode = globalThis.document): Result => {
 };
 
 export const withRoundTrip: DecoratorFunction = (storyFn, context) => {
+  const { parameters } = context
+  const cssViewerConfigs = getParameter(parameters, CONFIG_FILE, {
+    prefix: "",
+    ignorePrefix: ""
+  })
+
   const canvasElement = context.canvasElement as ParentNode;
   const emit = useChannel({
     [EVENTS.REQUEST]: () => {
@@ -36,5 +45,5 @@ export const withRoundTrip: DecoratorFunction = (storyFn, context) => {
     emit(EVENTS.RESULT, check(canvasElement));
   });
 
-  return storyFn();
+  return storyFn(cssViewerConfigs);
 };

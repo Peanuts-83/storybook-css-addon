@@ -8,3 +8,5 @@ export const EVENTS = {
   RESULT: `${ADDON_ID}/result`,
   REQUEST: `${ADDON_ID}/request`,
 };
+
+export const CONFIG_FILE = "css-viewer-configs"
