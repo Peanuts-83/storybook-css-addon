@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Code } from "storybook/internal/components";
-import { useStorybookState } from "storybook/internal/manager-api";
+import { useParameter, useStorybookState } from "storybook/internal/manager-api";
 import { styled } from "storybook/internal/theming";
 import { useCssViewer } from '../hooks/useCssViewer';
+import { CssViewerConfig } from 'src/types';
 
 interface TabProps {
   active: boolean;
@@ -24,10 +25,19 @@ const TabInner = styled.div({
 });
 
 export const Tab: React.FC<TabProps> = ({active}) => {
-  const { storyId } = useStorybookState(); // Get active story ID
-  const cssContent = useCssViewer(storyId); // Get style
-
-  if (!active || storyId.includes('introduction')) {
+  const { storyId } = useStorybookState(); // Get active story ID  
+  const [config, setConfig] = useState<CssViewerConfig|null>(null)
+  const cvc: CssViewerConfig = useParameter("cssViewerConfig")
+  
+  useLayoutEffect(() => {
+    if (cvc) {
+      setConfig(cvc)
+    }
+  }, [cvc, storyId])
+  
+  let cssContent = useCssViewer(active, storyId, config); // Get style
+  
+  if (!active || config?.ignore?.some(e => storyId.includes(e))) {
     return null;
   }
 

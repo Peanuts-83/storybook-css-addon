@@ -1,26 +1,14 @@
 {
-  "name": "storybook-addon-css-viewer",
+  "name": "css-viewer-docs",
   "version": "0.0.1",
-  "description": "Display css/less file content linked to story's component in a TAB.",
-  "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
+  "description": "Storybook demo for CssViewer Addon.",
   "repository": {
     "type": "git",
     "url": "https://github.com/Peanuts-83/storybook-css-addon.git"
   },
-  "type": "module",
-  "license": "MIT",
-  "author": "thomas ranque <tranque@free.fr>",
   "scripts": {
-    "clean": "rm -rf dist",
-    "build": "yarn run addon:build",
-    "watch": "yarn run build && yarn run docs:start",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "addon:build": "cd packages/css-viewer-addon/ && tsup",
-    "docs:build": "yarn workspace css-viewer-docs run build",
-    "docs:start": "yarn workspace css-viewer-docs run storybook"
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@storybook/icons": "^1.2.10",
@@ -47,6 +35,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "0.0.0-pr-26654-sha-49d01553",
+    "storybook-addon-css-viewer": "file:../../dist",
     "tsup": "^8.2.4",
     "typescript": "^5.5.4",
     "vite": "^5.3.5",
@@ -54,12 +43,5 @@
   },
   "peerDependencies": {
     "storybook": "^8.3.0 || 0.0.0-pr-26654-sha-49d01553"
-  },
-  "storybook": {
-    "displayName": "Css Viewer",
-    "supportedFrameworks": [
-      "react angular"
-    ],
-    "icon": "https://avatars.githubusercontent.com/u/74671565?v=4"
   }
 }

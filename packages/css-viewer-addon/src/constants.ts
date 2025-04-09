@@ -9,4 +9,10 @@ export const EVENTS = {
   REQUEST: `${ADDON_ID}/request`,
 };
 
-export const CONFIG_FILE = "css-viewer-configs"
+export const FORMAT = {
+  CSS: "css",
+  LESS: 'less',
+  SASS: "sass",
+  SCSS: "scss",
+  STYL: "styl"
+}

@@ -1,0 +1,105 @@
+import { Meta } from '@storybook/blocks';
+import Code from './assets/code-brackets.svg';
+import Colors from './assets/colors.svg';
+import Comments from './assets/comments.svg';
+import Direction from './assets/direction.svg';
+import Flow from './assets/flow.svg';
+import Plugin from './assets/plugin.svg';
+import Repo from './assets/repo.svg';
+import StackAlt from './assets/stackalt.svg';
+
+<Meta title="Example/Introduction" />
+
+<style>
+  {`
+    .subheading {
+      --mediumdark: '#999999';
+      font-weight: 700;
+      font-size: 13px;
+      color: #999;
+      letter-spacing: 6px;
+      line-height: 24px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      margin-top: 40px;
+    }
+
+    .config-setup {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+    }
+
+    pre {
+      width: 100%;
+    } 
+
+    .code {
+      width: 100%;
+      background-color: rgb(175, 203, 235);
+      border: 1px solid #999;
+      display: block;
+      padding: 20px 5rem;
+    }
+    
+    .tip {
+      display: inline-block;
+      border-radius: 1em;
+      font-size: 11px;
+      line-height: 12px;
+      font-weight: 700;
+      background: #E7FDD8;
+      color:rgb(45, 185, 174);
+      padding: 4px 12px;
+      margin-right: 10px;
+      vertical-align: top;
+    }
+
+    .tip-wrapper {
+      font-size: 13px;
+      line-height: 20px;
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+
+    .tip-wrapper code {
+      font-size: 12px;
+      display: inline-block;
+    }
+  `}
+</style>
+<script src="prism.js"></script>
+
+# Storybook CssViewer Addon
+
+This addon allows you to expose style related to your storie's component in a separate TAB called "CSS". 
+
+Style file formats allowed: *.css, *.less, *.sass, *.scss, *.styl.
+
+<div className="subheading">Configure</div>
+
+<div className="config-setup">
+    <i>In Storybook config file <b>.storybook/preview.js|ts</b></i>
+    ```javascript
+      
+      const preview = {
+        parameters: {
+          cssViewerConfig: {
+            /** prefix added to style file name */
+            prefix: string
+            /** prefix to ignore for style file name */
+            ignorePrefix: string
+            /** file format css|less|sass|scss|styl */
+            format: 'css' | 'less' | 'sass' | 'scss' | 'styl'
+            /** stories to ignore */
+            ignore: Array<string>
+          }          
+        }
+      }
+    ```
+</div>
+
+<div className="tip-wrapper">
+  <span className="tip">Tip</span>Edit the Markdown in{' '}
+  <code>stories/Introduction.stories.mdx</code>
+</div>
