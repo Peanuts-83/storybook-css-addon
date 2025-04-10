@@ -26,22 +26,14 @@ import StackAlt from './assets/stackalt.svg';
 
     .config-setup {
       display: flex;
-      width: 100%;
+      flex-direction: column;
       justify-content: center;
     }
 
-    pre {
-      width: 100%;
-    } 
-
-    .code {
-      width: 100%;
-      background-color: rgb(175, 203, 235);
-      border: 1px solid #999;
-      display: block;
-      padding: 20px 5rem;
+    .setup-block {
+      padding: 20px;
     }
-    
+
     .tip {
       display: inline-block;
       border-radius: 1em;
@@ -74,21 +66,24 @@ import StackAlt from './assets/stackalt.svg';
 
 This addon allows you to expose style related to your storie's component in a separate TAB called "CSS". 
 
-Style file formats allowed: *.css, *.less, *.sass, *.scss, *.styl.
+Style file formats allowed: *.css(default), *.less, *.sass, *.scss, *.styl.
 
 <div className="subheading">Configure</div>
 
 <div className="config-setup">
-    <i>In Storybook config file <b>.storybook/preview.js|ts</b></i>
+  <div className="setup-block">
+    <b>.storybook/preview.js|ts</b>
     ```javascript
       
       const preview = {
+        ...,
         parameters: {
+          ...,
           cssViewerConfig: {
             /** prefix added to style file name */
-            prefix: string
+            prefix?: string
             /** prefix to ignore for style file name */
-            ignorePrefix: string
+            ignorePrefix?: string
             /** file format css|less|sass|scss|styl */
             format: 'css' | 'less' | 'sass' | 'scss' | 'styl'
             /** stories to ignore */
@@ -97,6 +92,38 @@ Style file formats allowed: *.css, *.less, *.sass, *.scss, *.styl.
         }
       }
     ```
+  </div>
+  <div className="setup-block">
+    <b>.storybook/main.js|ts</b>
+      ```javascript
+        
+        const config = {
+          ...,
+          /** add cssViewer addon */
+          addons: [
+            ...,
+            "@storybook/addon-css-viewer"
+          ],
+          /** copy all style files in src/styles */
+          staticDirs: [
+            ...,
+            {from: '../src/styles', to:'assets/styles'}
+          ]
+        }
+      ```
+  </div>
+  <div className="setup-block">
+    <b>package.json</b>
+    <p>If you want to automate style files' copy to .\/src\/styles (here for *.css files, adjust script to your configuration): </p>
+      ```javascript
+        
+        "scripts": {
+          "pre-styles": "rm -rf ./src/styles && mkdir ./src/styles && find ./src/stories -type f -name '*.css'  -exec cp {} ./src/styles \\;",
+          "storybook": "yarn pre-styles && storybook dev -p 6006",
+          "build-storybook": "yarn pre-styles && storybook build"
+        }
+      ```
+  </div>
 </div>
 
 <div className="tip-wrapper">

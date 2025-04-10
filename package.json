@@ -1,5 +1,5 @@
 {
-  "name": "storybook-addon-css-viewer",
+  "name": "@storybook/addon-css-viewer",
   "version": "0.0.1",
   "description": "Display css/less file content linked to story's component in a TAB.",
   "private": true,
@@ -19,7 +19,7 @@
     "watch": "yarn run build && yarn run docs:start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "addon:build": "cd packages/css-viewer-addon/ && tsup",
-    "docs:build": "yarn workspace css-viewer-docs run build",
+    "docs:build": "yarn workspace css-viewer-docs run build-storybook",
     "docs:start": "yarn workspace css-viewer-docs run storybook"
   },
   "dependencies": {

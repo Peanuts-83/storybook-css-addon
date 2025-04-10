@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { FORMAT } from 'src/constants';
 import { CssViewerConfig } from 'src/types';
 
 
@@ -9,6 +10,8 @@ export const useCssViewer = (active: boolean, componentId?: string, config?: Css
     useEffect(() => {
         if (config?.format) {
             setExt(config.format)
+        } else {
+            setExt(FORMAT.CSS)
         }
     }, [config])
 
@@ -22,15 +25,17 @@ export const useCssViewer = (active: boolean, componentId?: string, config?: Css
                 } else if (!ext) {
                     throw new Error('no extension available !')
                 } 
-                const baseName = config.prefix + componentId.replace(config.ignorePrefix, "").split('--')[0];
-                let cssText = '';    
+                console.log(`id: ${componentId}, config: ${JSON.stringify(config)}`)
+                const {prefix, ignorePrefix} = config
+                const baseName = (prefix || '') + componentId.replace(ignorePrefix || "", "").split('--')[0];
+                let cssText = "";    
                 try {
-                    const response = await fetch(`./assets/${config.prefix}${baseName}.${ext}`);
+                    const response = await fetch(`./assets/styles/${prefix || ""}${baseName}.${ext}`);
                     if (response.ok) {
                         cssText = await response.text();
                     }
                 } catch (err) {
-                    console.warn(`Failed to fetch ./assets/${config.prefix}${baseName}.${ext}:`, err);
+                    console.warn(`Failed to fetch ./assets/styles/${prefix || ""}${baseName}.${ext}:`, err);
                 } 
                 setCss(cssText);
             } catch (error) {

@@ -49,7 +49,7 @@ export default defineConfig(async (options) => {
     treeshake: true,
     sourcemap: true,
     clean: options.watch ? false : true,
-    outDir: "../../dist",
+    outDir: "dist",
   };
 
   const configs: Options[] = [];

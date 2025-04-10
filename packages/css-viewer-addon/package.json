@@ -1,5 +1,5 @@
 {
-  "name": "css-viewer-addon",
+  "name": "@storybook/addon-css-viewer",
   "version": "0.0.1",
   "description": "Display css/less file content linked to story's component in a TAB.",
   "keywords": [
@@ -16,17 +16,17 @@
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "dist/index.d.ts",
-      "import": "dist/index.js",
-      "require": "dist/index.cjs"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     },
     "./preview": {
-      "types": "dist/index.d.ts",
-      "import": "dist/preview.js",
-      "require": "dist/preview.cjs"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/preview.js",
+      "require": "./dist/preview.cjs"
     },
-    "./preset": "dist/preset.cjs",
-    "./manager": "dist/manager.js",
+    "./preset": "./dist/preset.cjs",
+    "./manager": "./dist/manager.js",
     "./package.json": "./package.json"
   },
   "files": [

@@ -6,8 +6,7 @@ const config: StorybookConfig = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
-    "./local-preset.js",
-    "../../dist"
+    "@storybook/addon-css-viewer"
   ],
   framework: {
     name: "@storybook/react-vite",
@@ -16,6 +15,6 @@ const config: StorybookConfig = {
   docs: {
     autodocs: "tag",
   },
-  staticDirs: [{from: '../src/stories/styles', to:'assets'}]
+  staticDirs: [{from: '../src/styles', to:'assets/styles'}]
 };
 export default config;

@@ -1749,6 +1749,9 @@
     lodash "^4.17.21"
     ts-dedent "^2.0.0"
 
+"@storybook/addon-css-viewer@file:packages/css-viewer-addon/dist":
+  version "0.0.0"
+
 "@storybook/addon-docs@0.0.0-pr-26654-sha-49d01553":
   version "0.0.0-pr-26654-sha-49d01553"
   resolved "https://verdaccio.emedisys.fr/@storybook/addon-docs/-/addon-docs-0.0.0-pr-26654-sha-49d01553.tgz#8532a9138c8ce9f477e25ae46d8c37e80f451317"
@@ -3259,9 +3262,9 @@ ee-first@1.1.1:
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
 electron-to-chromium@^1.5.73:
-  version "1.5.132"
-  resolved "https://verdaccio.emedisys.fr/electron-to-chromium/-/electron-to-chromium-1.5.132.tgz#081b8086d7cecc58732f7cc1f1c19306c5510c5f"
-  integrity sha512-QgX9EBvWGmvSRa74zqfnG7+Eno0Ak0vftBll0Pt2/z5b3bEGYL6OUXLgKPtvx73dn3dvwrlyVkjPKRRlhLYTEg==
+  version "1.5.134"
+  resolved "https://verdaccio.emedisys.fr/electron-to-chromium/-/electron-to-chromium-1.5.134.tgz#d90008c4f8a506c1a6d1b329f922d83e18904101"
+  integrity sha512-zSwzrLg3jNP3bwsLqWHmS5z2nIOQ5ngMnfMZOWWtXnqqQkPVyOipxK98w+1beLw1TB+EImPNcG8wVP/cLVs2Og==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -5764,9 +5767,6 @@ statuses@2.0.1:
   resolved "https://verdaccio.emedisys.fr/statuses/-/statuses-2.0.1.tgz#55cb000ccf1d48728bd23c685a063998cf1a1b63"
   integrity sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==
 
-"storybook-addon-css-viewer@file:dist":
-  version "0.0.0"
-
 storybook@0.0.0-pr-26654-sha-49d01553:
   version "0.0.0-pr-26654-sha-49d01553"
   resolved "https://verdaccio.emedisys.fr/storybook/-/storybook-0.0.0-pr-26654-sha-49d01553.tgz#cb11ffab84386da2f2ce2d5d59d18ebef7ecc520"
@@ -6243,9 +6243,9 @@ typical@^5.2.0:
   integrity sha512-dvdQgNDNJo+8B2uBQoqdb11eUCE1JQXhvjC/CZtgvZseVd5TYMXnq0+vuUemXbd/Se29cTaUuPX3YIc2xgbvIg==
 
 ufo@^1.5.4:
-  version "1.6.0"
-  resolved "https://verdaccio.emedisys.fr/ufo/-/ufo-1.6.0.tgz#97c0729950279476b94b4ccdfd264a7206f7c872"
-  integrity sha512-AkgU2cV/+Xb4Uz6cic0kMZbtM42nbltnGvTVOt/8gMCbO2/z64nE47TOygh7HjgFPkUkVRBEyNFqpqi3zo+BJA==
+  version "1.6.1"
+  resolved "https://verdaccio.emedisys.fr/ufo/-/ufo-1.6.1.tgz#ac2db1d54614d1b22c1d603e3aef44a85d8f146b"
+  integrity sha512-9a4/uxlTWJ4+a5i0ooc1rU7C7YOw3wT+UGqdeNNHWnOF9qcMBgLRS+4IYUqbczewFx4mLEig6gawh7X6mFlEkA==
 
 undici-types@~5.26.4:
   version "5.26.5"
