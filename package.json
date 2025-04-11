@@ -41,8 +41,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "addon:build": "cd packages/css-viewer-addon/ && tsup",
     "docs:build": "yarn workspace css-viewer-docs run build-storybook",
-    "docs:start": "yarn workspace css-viewer-docs run storybook",
-    "postinstall": "yarn build"
+    "docs:start": "yarn workspace css-viewer-docs run storybook"
   },
   "dependencies": {
     "@storybook/icons": "^1.2.10",
