@@ -1,6 +1,6 @@
 {
   "name": "css-viewer-docs",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Storybook demo for CssViewer Addon.",
   "repository": {
     "type": "git",

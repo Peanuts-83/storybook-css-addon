@@ -12,4 +12,6 @@ export interface CssViewerConfig {
   ignore: string[]
   /** regex to transform story ID into file name */
   fileRegex?: { in: string, out: string }
+  /** debug mode activation */
+  debug?: boolean
 }

@@ -18,7 +18,9 @@ const preview: Preview = {
       fileRegex: {
         in: "example-(.*)--.*$", 
         out: "$1"
-      }
+      },
+      /** debug mode activation */
+      debug: true
     }
   },
   initialGlobals: {

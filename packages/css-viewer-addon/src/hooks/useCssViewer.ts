@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { FORMAT } from 'src/constants';
 import { CssViewerConfig } from 'src/types';
 
 
@@ -8,6 +7,7 @@ export const useCssViewer = (active: boolean, componentId?: string, config?: Css
 
     useEffect(() => {
         const fetchCss = async () => {
+            let debugMode = config?.debug || false
             try {
                 if (!componentId) {
                     throw new Error('no story id !');
@@ -20,13 +20,15 @@ export const useCssViewer = (active: boolean, componentId?: string, config?: Css
                 if (config.fileRegex) {
                     const regex = new RegExp(config.fileRegex.in)
                     if (regex.test(baseName)) {
+                        debugMode && console.log(`Regex [${JSON.stringify(config.fileRegex)}] applying to : ${baseName}`)
                         baseName = baseName.replace(regex, config.fileRegex.out);
                     } else {
-                        console.warn(`Regex did not match: ${config.fileRegex.in}, storyId: ${componentId}`);
+                        debugMode && console.warn(`Regex did not match: ${config.fileRegex.in}, storyId: ${componentId}`);
                     }
                 } else {
                     baseName = baseName.split('--')[0];
                 }
+                debugMode && console.log(`Style file name: ${baseName}.${config.format}`)
                 
                 let cssText = "";    
                 try {
@@ -35,11 +37,11 @@ export const useCssViewer = (active: boolean, componentId?: string, config?: Css
                         cssText = await response.text();
                     }
                 } catch (err) {
-                    console.warn(`Failed to fetch ./assets/stylesForPreview/${baseName}.${config.format}:`, err);
+                    debugMode && console.warn(`Failed to fetch ./assets/stylesForPreview/${baseName}.${config.format}:`, err);
                 } 
                 setCss(cssText);
             } catch (error) {
-                console.error(error.message);
+                debugMode && console.error(error);
                 setCss("No style available for this story.");
             }
         };
