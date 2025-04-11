@@ -1,6 +1,6 @@
 {
   "name": "@storybook/addon-css-viewer",
-  "version": "8.5.6",
+  "version": "8.5.6b",
   "description": "Display css/less file content linked to story's component in a TAB.",
   "keywords": [
     "storybook-addon", "css", "less", "viewer", "display", "tab", "storybook-addons"
