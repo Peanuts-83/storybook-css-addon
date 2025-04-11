@@ -40,12 +40,12 @@ export default defineConfig(async (options) => {
     treeshake: true,
     sourcemap: true,
     clean: options.watch ? false : true,
-    outDir: "../../dist", 
+    outDir: "./dist", 
     onSuccess: async () => {
       // Create symLink after build - required for demo project
       try {
-        execSync("ln -sf ../../dist ./dist", { stdio: "inherit" });
-        console.log("Symlink created : ./dist -> ../../dist");
+        execSync("ln -sf ./dist ../../dist", { stdio: "inherit" });
+        console.log("Symlink created : ../../dist -> ./dist");
       } catch (error) {
         console.error("Symlink error :", error);
       }
