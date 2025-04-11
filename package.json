@@ -13,7 +13,6 @@
   "type": "module",
   "license": "MIT",
   "author": "thomas ranque <tranque@free.fr>",
-  "author": "thomas ranque <tranque@free.fr>",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
