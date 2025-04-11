@@ -95,7 +95,7 @@
   "storybook": {
     "displayName": "Css Viewer",
     "supportedFrameworks": [
-      "react angular"
+      "react angular any"
     ],
     "icon": "https://avatars.githubusercontent.com/u/74671565?v=4"
   }
