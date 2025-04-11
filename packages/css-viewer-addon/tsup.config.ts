@@ -42,12 +42,12 @@ export default defineConfig(async (options) => {
     clean: options.watch ? false : true,
     outDir: "./dist", 
     onSuccess: async () => {
-      // Create symLink after build - required for demo project
+      // Copy after build - required for demo project
       try {
-        execSync("ln -sf ./dist ../../dist", { stdio: "inherit" });
-        console.log("Symlink created : ../../dist -> ./dist");
+        execSync("cp -r ./dist ../../", { stdio: "inherit" });
+        console.log("cp done : ./dist -> ../../dist");
       } catch (error) {
-        console.error("Symlink error :", error);
+        console.error("cp error :", error);
       }
     },
   };
