@@ -2,9 +2,8 @@
   "name": "@storybook/addon-css-viewer",
   "version": "8.5.5",
   "description": "Display css/less file content linked to story's component in a TAB.",
-  "private": true,
-  "workspaces": [
-    "packages/*"
+  "keywords": [
+    "storybook-addon", "css", "less", "viewer", "display", "tab", "storybook-addons"
   ],
   "repository": {
     "type": "git",
@@ -13,7 +12,8 @@
   "type": "module",
   "license": "MIT",
   "author": "thomas ranque <tranque@free.fr>",
-  "author": "thomas ranque <tranque@free.fr>",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -36,13 +36,8 @@
     "*.d.ts"
   ],
   "scripts": {
-    "clean": "rm -rf dist",
-    "build": "yarn run addon:build",
-    "watch": "yarn run build && yarn run docs:start",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "addon:build": "cd packages/css-viewer-addon/ && tsup",
-    "docs:build": "yarn workspace css-viewer-docs run build-storybook",
-    "docs:start": "yarn workspace css-viewer-docs run storybook"
+    "build": "tsup",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "@storybook/icons": "^1.2.10",
@@ -76,6 +71,26 @@
   },
   "peerDependencies": {
     "storybook": "^8.3.0 || 0.0.0-pr-26654-sha-49d01553"
+  },
+  "overrides": {
+    "storybook": "0.0.0-pr-26654-sha-49d01553"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "bundler": {
+    "exportEntries": [
+      "./src/index.ts"
+    ],
+    "managerEntries": [
+      "./src/manager.tsx"
+    ],
+    "previewEntries": [
+      "./src/preview.ts"
+    ],
+    "nodeEntries": [
+      "./src/preset.ts"
+    ]
   },
   "storybook": {
     "displayName": "Css Viewer",

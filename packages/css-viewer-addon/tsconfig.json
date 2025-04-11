@@ -14,5 +14,5 @@
     "skipLibCheck": true,
     "target": "ES2020"
   },
-  "include": ["src/**/*"]
+  "include": ["./src/**/*", "./src/components", "./src/constants.ts", "./src/manager.tsx", "./src/preview.ts", "./src/preset.ts", "./src/withRoundTrip.ts", "./src/hooks/", ]
 }

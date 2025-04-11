@@ -1749,9 +1749,6 @@
     lodash "^4.17.21"
     ts-dedent "^2.0.0"
 
-"@storybook/addon-css-viewer@file:dist":
-  version "0.0.0"
-
 "@storybook/addon-docs@0.0.0-pr-26654-sha-49d01553":
   version "0.0.0-pr-26654-sha-49d01553"
   resolved "https://verdaccio.emedisys.fr/@storybook/addon-docs/-/addon-docs-0.0.0-pr-26654-sha-49d01553.tgz#8532a9138c8ce9f477e25ae46d8c37e80f451317"

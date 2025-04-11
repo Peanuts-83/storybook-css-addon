@@ -8,3 +8,11 @@ export const EVENTS = {
   RESULT: `${ADDON_ID}/result`,
   REQUEST: `${ADDON_ID}/request`,
 };
+
+export const FORMAT = {
+  CSS: "css",
+  LESS: 'less',
+  SASS: "sass",
+  SCSS: "scss",
+  STYL: "styl"
+}

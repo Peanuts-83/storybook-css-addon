@@ -1,0 +1,136 @@
+import { Meta } from '@storybook/blocks';
+import Code from './assets/code-brackets.svg';
+import Colors from './assets/colors.svg';
+import Comments from './assets/comments.svg';
+import Direction from './assets/direction.svg';
+import Flow from './assets/flow.svg';
+import Plugin from './assets/plugin.svg';
+import Repo from './assets/repo.svg';
+import StackAlt from './assets/stackalt.svg';
+
+<Meta title="Example/Introduction" />
+
+<style>
+  {`
+    .subheading {
+      --mediumdark: '#999999';
+      font-weight: 700;
+      font-size: 13px;
+      color: #999;
+      letter-spacing: 6px;
+      line-height: 24px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      margin-top: 40px;
+    }
+
+    .config-setup {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .setup-block {
+      padding: 20px;
+    }
+
+    .tip {
+      display: inline-block;
+      border-radius: 1em;
+      font-size: 11px;
+      line-height: 12px;
+      font-weight: 700;
+      background: #E7FDD8;
+      color:rgb(45, 185, 174);
+      padding: 4px 12px;
+      margin-right: 10px;
+      vertical-align: top;
+    }
+
+    .tip-wrapper {
+      font-size: 13px;
+      line-height: 20px;
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+
+    .tip-wrapper code {
+      font-size: 12px;
+      display: inline-block;
+    }
+  `}
+</style>
+<script src="prism.js"></script>
+
+# Storybook CssViewer Addon
+
+This addon allows you to expose style related to your storie's component in a separate TAB called "CSS". 
+
+Style file formats allowed: *.css(default), *.less, *.sass, *.scss, *.styl.
+
+**Please note style's file names are deducted from stories id, so pay attention to your stories id naming!**
+
+```bash
+{ story id: 'ExampleButton', file name: 'button.css' } > KO
+{ story id: 'button', file name: 'button.css' } > OK
+{ story id: 'button.component', file name: 'button.component.css' } > OK
+```
+
+<div className="subheading">Configure</div>
+
+<div className="config-setup">
+  <div className="setup-block">
+    <b>.storybook/preview.js|ts</b>
+    ```javascript
+      
+      const preview = {
+        ...,
+        parameters: {
+          ...,
+          cssViewerConfig: {
+            /** file format css|less|sass|scss|styl */
+            format: 'css' | 'less' | 'sass' | 'scss' | 'styl'
+            /** stories to ignore */
+            ignore: Array<string>
+          }          
+        }
+      }
+    ```
+  </div>
+  <div className="setup-block">
+    <b>.storybook/main.js|ts</b>
+      ```javascript
+        
+        const config = {
+          ...,
+          /** add cssViewer addon */
+          addons: [
+            ...,
+            "@storybook/addon-css-viewer"
+          ],
+          /** copy all style files to src/styles */
+          staticDirs: [
+            ...,
+            {from: '../src/styles', to:'assets/styles'}
+          ]
+        }
+      ```
+  </div>
+  <div className="setup-block">
+    <b>package.json</b>
+    <p>If you want to automate style files' copy to .\/src\/styles (here for *.css files, adjust script to your configuration): </p>
+      ```javascript
+        
+        "scripts": {
+          "pre-styles": "rm -rf ./src/assets/stylesForPreview && mkdir ./src/assets/stylesForPreview && find ./src/stories -type f -name '*.css'  -exec cp {} ./src/assets/stylesForPreview \\;",
+          "storybook": "yarn pre-styles && storybook dev -p 6006",
+          "build-storybook": "yarn pre-styles && storybook build"
+        }
+      ```
+  </div>
+</div>
+
+<div className="tip-wrapper">
+  <span className="tip">Tip</span>Edit the Markdown in{' '}
+  <code>stories/Introduction.stories.mdx</code>
+</div>

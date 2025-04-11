@@ -1,0 +1,49 @@
+{
+  "name": "css-viewer-docs",
+  "version": "1.0.0",
+  "description": "Storybook demo for CssViewer Addon.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Peanuts-83/storybook-css-addon.git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "pre-styles": "find ./src/stories -type f -name '*.css' -exec cp {} ./src/stylesForPreview \\;",
+    "storybook": "yarn pre-styles && storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "@storybook/icons": "^1.2.10",
+    "styled-components": "^6.1.17"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "0.0.0-pr-26654-sha-49d01553",
+    "@storybook/addon-interactions": "0.0.0-pr-26654-sha-49d01553",
+    "@storybook/addon-links": "0.0.0-pr-26654-sha-49d01553",
+    "@storybook/blocks": "0.0.0-pr-26654-sha-49d01553",
+    "@storybook/react": "0.0.0-pr-26654-sha-49d01553",
+    "@storybook/react-vite": "0.0.0-pr-26654-sha-49d01553",
+    "@storybook/test": "0.0.0-pr-26654-sha-49d01553",
+    "@types/node": "^18.15.0",
+    "@types/react": "^18.2.65",
+    "@types/react-dom": "^18.2.21",
+    "@vitejs/plugin-react": "^4.2.1",
+    "auto": "^11.1.1",
+    "boxen": "^7.1.1",
+    "dedent": "^1.5.1",
+    "npm-run-all2": "^6.2.3",
+    "prettier": "^3.3.3",
+    "prompts": "^2.4.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "storybook": "0.0.0-pr-26654-sha-49d01553",
+    "@storybook/addon-css-viewer": "file:../../dist",
+    "tsup": "^8.2.4",
+    "typescript": "^5.5.4",
+    "vite": "^5.3.5",
+    "zx": "^7.2.3"
+  },
+  "peerDependencies": {
+    "storybook": "^8.3.0 || 0.0.0-pr-26654-sha-49d01553"
+  }
+}
