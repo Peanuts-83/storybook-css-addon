@@ -14,8 +14,8 @@ Display css/less file content linked to story's component in a TAB.
 ## Project structure
 
 You will find in [/packages](./packages/) folder:
-* [css-viewer-addon](./packages/css-viewer-addon/) : The addon itself
-* [css-viewer-docs](./packages/css-viewer-docs/) : a demo project to help you understand how it works
+* [css-viewer-addon](./packages/css-viewer-addon/README.md) : The addon itself
+* [css-viewer-docs](./packages/css-viewer-docs/README.md) : a demo project to help you understand how it works
 
 ## Credentials
 
