@@ -11,7 +11,7 @@
   },
   "type": "module",
   "license": "MIT",
-  "author": "thomas ranque <tranque@free.fr>",
+  "author": "Peanuts-83 thomas ranque <tranque@free.fr>",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
