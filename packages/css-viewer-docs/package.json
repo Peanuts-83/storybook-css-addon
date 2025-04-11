@@ -8,9 +8,9 @@
   },
   "license": "MIT",
   "scripts": {
-    "pre-styles": "rm -rf ./src/styles && mkdir ./src/styles && find ./src/stories -type f -name '*.css' -exec cp {} ./src/styles \\;",
+    "pre-styles": "find ./src/stories -type f -name '*.css' -exec cp {} ./src/stylesForPreview \\;",
     "storybook": "yarn pre-styles && storybook dev -p 6006",
-    "build-storybook": "yarn pre-styles && storybook build"
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@storybook/icons": "^1.2.10",
@@ -37,7 +37,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "0.0.0-pr-26654-sha-49d01553",
-    "@storybook/addon-css-viewer": "file:../../packages/css-viewer-addon/dist",
+    "@storybook/addon-css-viewer": "file:../../dist",
     "tsup": "^8.2.4",
     "typescript": "^5.5.4",
     "vite": "^5.3.5",

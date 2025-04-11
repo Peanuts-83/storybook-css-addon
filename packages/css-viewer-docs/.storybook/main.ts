@@ -15,6 +15,6 @@ const config: StorybookConfig = {
   docs: {
     autodocs: "tag",
   },
-  staticDirs: [{from: '../src/styles', to:'assets/styles'}]
+  staticDirs: [{ from: '../src/stylesForPreview', to:'assets/stylesForPreview'}]
 };
 export default config;

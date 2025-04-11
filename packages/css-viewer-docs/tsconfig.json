@@ -10,7 +10,7 @@
     "lib": ["es2020", "dom"],
     "module": "commonjs",
     "noImplicitAny": true,
-    "rootDir": "./src",
+    "rootDir": "../../",
     "skipLibCheck": true,
     "target": "ES2020"
   },

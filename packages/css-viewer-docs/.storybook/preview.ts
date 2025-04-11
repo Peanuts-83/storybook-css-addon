@@ -10,14 +10,15 @@ const preview: Preview = {
       },
     },
     cssViewerConfig: {
-      /** prefix added to style file name */
-      prefix: "",
-      /** prefix to ignore for style file name */
-      ignorePrefix: "example-",
       /** file format css|less|sass|scss|styl */
       format: FORMAT.CSS,
       /** stories to ignore */
-      ignore: ['introduction']
+      ignore: ['introduction'],
+      /** regex to transform story ID into file name */
+      fileRegex: {
+        in: "example-(.*)--.*$", 
+        out: "$1"
+      }
     }
   },
   initialGlobals: {

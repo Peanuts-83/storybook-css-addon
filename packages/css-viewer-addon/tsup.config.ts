@@ -1,4 +1,5 @@
 import { defineConfig, type Options } from "tsup";
+import { execSync } from "child_process";
 import { readFile } from "node:fs/promises";
 import { globalPackages as globalManagerPackages } from "storybook/internal/manager/globals";
 import { globalPackages as globalPreviewPackages } from "storybook/internal/preview/globals";
@@ -21,16 +22,6 @@ type BundlerConfig = {
 };
 
 export default defineConfig(async (options) => {
-  // reading the three types of entries from package.json, which has the following structure:
-  // {
-  //  ...
-  //   "bundler": {
-  //     "exportEntries": ["./src/index.ts"],
-  //     "managerEntries": ["./src/manager.ts"],
-  //     "previewEntries": ["./src/preview.ts"]
-  //     "nodeEntries": ["./src/preset.ts"]
-  //   }
-  // }
   const packageJson = (await readFile("./package.json", "utf8").then(
     JSON.parse,
   )) as BundlerConfig;
@@ -49,7 +40,16 @@ export default defineConfig(async (options) => {
     treeshake: true,
     sourcemap: true,
     clean: options.watch ? false : true,
-    outDir: "dist",
+    outDir: "../../dist", 
+    onSuccess: async () => {
+      // Create symLink after build - required for demo project
+      try {
+        execSync("ln -sf ../../dist ./dist", { stdio: "inherit" });
+        console.log("Symlink created : ./dist -> ../../dist");
+      } catch (error) {
+        console.error("Symlink error :", error);
+      }
+    },
   };
 
   const configs: Options[] = [];

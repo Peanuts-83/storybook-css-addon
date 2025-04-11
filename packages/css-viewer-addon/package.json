@@ -37,7 +37,6 @@
   ],
   "scripts": {
     "build": "tsup",
-    "build:watch": "npm run build -- --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

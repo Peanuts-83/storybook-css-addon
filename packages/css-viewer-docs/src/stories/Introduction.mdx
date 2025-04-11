@@ -68,6 +68,14 @@ This addon allows you to expose style related to your storie's component in a se
 
 Style file formats allowed: *.css(default), *.less, *.sass, *.scss, *.styl.
 
+**Please note style's file names are deducted from stories id, so pay attention to your stories id naming!**
+
+```bash
+{ story id: 'ExampleButton', file name: 'button.css' } > KO
+{ story id: 'button', file name: 'button.css' } > OK
+{ story id: 'button.component', file name: 'button.component.css' } > OK
+```
+
 <div className="subheading">Configure</div>
 
 <div className="config-setup">
@@ -80,10 +88,6 @@ Style file formats allowed: *.css(default), *.less, *.sass, *.scss, *.styl.
         parameters: {
           ...,
           cssViewerConfig: {
-            /** prefix added to style file name */
-            prefix?: string
-            /** prefix to ignore for style file name */
-            ignorePrefix?: string
             /** file format css|less|sass|scss|styl */
             format: 'css' | 'less' | 'sass' | 'scss' | 'styl'
             /** stories to ignore */
@@ -104,7 +108,7 @@ Style file formats allowed: *.css(default), *.less, *.sass, *.scss, *.styl.
             ...,
             "@storybook/addon-css-viewer"
           ],
-          /** copy all style files in src/styles */
+          /** copy all style files to src/styles */
           staticDirs: [
             ...,
             {from: '../src/styles', to:'assets/styles'}
@@ -118,7 +122,7 @@ Style file formats allowed: *.css(default), *.less, *.sass, *.scss, *.styl.
       ```javascript
         
         "scripts": {
-          "pre-styles": "rm -rf ./src/styles && mkdir ./src/styles && find ./src/stories -type f -name '*.css'  -exec cp {} ./src/styles \\;",
+          "pre-styles": "rm -rf ./src/assets/stylesForPreview && mkdir ./src/assets/stylesForPreview && find ./src/stories -type f -name '*.css'  -exec cp {} ./src/assets/stylesForPreview \\;",
           "storybook": "yarn pre-styles && storybook dev -p 6006",
           "build-storybook": "yarn pre-styles && storybook build"
         }

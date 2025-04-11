@@ -5,15 +5,6 @@ import { CssViewerConfig } from 'src/types';
 
 export const useCssViewer = (active: boolean, componentId?: string, config?: CssViewerConfig) => {
     const [css, setCss] = useState<string>("");
-    const [ext, setExt] = useState<string>("css")
-
-    useEffect(() => {
-        if (config?.format) {
-            setExt(config.format)
-        } else {
-            setExt(FORMAT.CSS)
-        }
-    }, [config])
 
     useEffect(() => {
         const fetchCss = async () => {
@@ -22,24 +13,33 @@ export const useCssViewer = (active: boolean, componentId?: string, config?: Css
                     throw new Error('no story id !');
                 } else if (!config) {
                     throw new Error('no config available !')
-                } else if (!ext) {
-                    throw new Error('no extension available !')
+                } else if (!config.format) {
+                    throw new Error('no extension format available !')
                 } 
-                console.log(`id: ${componentId}, config: ${JSON.stringify(config)}`)
-                const {prefix, ignorePrefix} = config
-                const baseName = (prefix || '') + componentId.replace(ignorePrefix || "", "").split('--')[0];
+                let baseName: string = componentId
+                if (config.fileRegex) {
+                    const regex = new RegExp(config.fileRegex.in)
+                    if (regex.test(baseName)) {
+                        baseName = baseName.replace(regex, config.fileRegex.out);
+                    } else {
+                        console.warn(`Regex did not match: ${config.fileRegex.in}, storyId: ${componentId}`);
+                    }
+                } else {
+                    baseName = baseName.split('--')[0];
+                }
+                
                 let cssText = "";    
                 try {
-                    const response = await fetch(`./assets/styles/${prefix || ""}${baseName}.${ext}`);
+                    const response = await fetch(`./assets/stylesForPreview/${baseName}.${config.format}`);
                     if (response.ok) {
                         cssText = await response.text();
                     }
                 } catch (err) {
-                    console.warn(`Failed to fetch ./assets/styles/${prefix || ""}${baseName}.${ext}:`, err);
+                    console.warn(`Failed to fetch ./assets/stylesForPreview/${baseName}.${config.format}:`, err);
                 } 
                 setCss(cssText);
             } catch (error) {
-                // console.error(error.message);
+                console.error(error.message);
                 setCss("No style available for this story.");
             }
         };
