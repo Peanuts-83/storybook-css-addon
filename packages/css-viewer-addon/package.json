@@ -1,6 +1,6 @@
 {
   "name": "@storybook/addon-css-viewer",
-  "version": "8.5.6e",
+  "version": "8.5.6h",
   "description": "Display css/less file content linked to story's component in a TAB.",
   "keywords": [
     "storybook-addon", "css", "less", "viewer", "display", "tab", "storybook-addons"
@@ -37,8 +37,7 @@
   ],
   "scripts": {
     "build": "tsup",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "yarn build"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "@storybook/icons": "^1.2.10",
