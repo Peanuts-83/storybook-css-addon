@@ -80,7 +80,6 @@ Please note **debugMode** (activable from config) is here to help you fit the ri
 
 ## Credentials
 
-[![Peanuts-83](../../assets/peanuts-mini.png)](https://github.com/Peanuts-83)<br>
-**Peanuts-83** aka Thomas RANQUE<br>
+[**Peanuts-83** aka Thomas RANQUE](https://github.com/Peanuts-83)<br>
 https://github.com/Peanuts-83<br>
 tranque@free.fr
