@@ -1,2 +1,42 @@
-import {useChannel,useEffect}from'storybook/internal/preview-api';var o="storybook-css-display";var s={RESULT:`${o}/result`,REQUEST:`${o}/request`};var c=(e=globalThis.document)=>{let n=e.querySelectorAll("div"),r=e.querySelectorAll("*");return {divs:Array.from(n).filter(t=>t.childNodes.length<2).map(t=>t.getBoundingClientRect()),styled:Array.from(r).filter(t=>t.hasAttribute("style")).map(t=>t.getBoundingClientRect())}},i=(e,n)=>{let r=n.canvasElement,t=useChannel({[s.REQUEST]:()=>{t(s.RESULT,c(r));}});return useEffect(()=>{t(s.RESULT,c(r));}),e()};var a={decorators:[i]},A=a;export{A as default};//# sourceMappingURL=preview.js.map
+import { useChannel, useEffect } from 'storybook/internal/preview-api';
+
+// src/withRoundTrip.ts
+
+// src/constants.ts
+var ADDON_ID = "storybook-css-display";
+var EVENTS = {
+  RESULT: `${ADDON_ID}/result`,
+  REQUEST: `${ADDON_ID}/request`
+};
+
+// src/withRoundTrip.ts
+var check = (canvas = globalThis.document) => {
+  const divs = canvas.querySelectorAll("div");
+  const all = canvas.querySelectorAll("*");
+  return {
+    divs: Array.from(divs).filter((element) => element.childNodes.length < 2).map((div) => div.getBoundingClientRect()),
+    styled: Array.from(all).filter((element) => element.hasAttribute("style")).map((element) => element.getBoundingClientRect())
+  };
+};
+var withRoundTrip = (storyFn, context) => {
+  const canvasElement = context.canvasElement;
+  const emit = useChannel({
+    [EVENTS.REQUEST]: () => {
+      emit(EVENTS.RESULT, check(canvasElement));
+    }
+  });
+  useEffect(() => {
+    emit(EVENTS.RESULT, check(canvasElement));
+  });
+  return storyFn();
+};
+
+// src/preview.ts
+var preview = {
+  decorators: [withRoundTrip]
+};
+var preview_default = preview;
+
+export { preview_default as default };
+//# sourceMappingURL=preview.js.map
 //# sourceMappingURL=preview.js.map

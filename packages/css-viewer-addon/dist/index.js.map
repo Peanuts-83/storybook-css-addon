@@ -1,1 +1,1 @@
-{"version":3,"sources":["../src/index.ts"],"names":["index_default"],"mappings":"AACA,IAAOA,EAAQ","file":"index.js","sourcesContent":["// make it work with --isolatedModules\nexport default {};\n"]}
+{"version":3,"sources":["../src/index.ts"],"names":[],"mappings":";AACA,IAAO,gBAAQ","file":"index.js","sourcesContent":["// make it work with --isolatedModules\nexport default {};\n"]}

@@ -3,8 +3,10 @@
 // so often you want to delete this file and remove the reference to it in package.json#exports and package.json#bunder.nodeEntries
 // Read more about presets at https://storybook.js.org/docs/addons/writing-presets
 
-export const viteFinal = async (config: any) => {
+export const viteFinal = async (config: any, options: any) => {
   console.log("This addon is augmenting the Vite config");
+  if (options.configType === "DEVELOPMENT")
+    console.log("[addon-css-viewer] viteFinal in devlopment mode.")
   return config;
 };
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Code } from "storybook/internal/components";
-import { useParameter, useStorybookState } from "storybook/internal/manager-api";
-import { styled } from "storybook/internal/theming";
+import { useParameter, useStorybookState } from "storybook/manager-api";
+import { styled } from "storybook/theming";
 import { useCssViewer } from '../hooks/useCssViewer';
 import { CssViewerConfig } from 'src/types';
 

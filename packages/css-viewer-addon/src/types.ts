@@ -1,5 +1,3 @@
-import { FORMAT } from "./constants"
-
 export interface Result {
   divs: DOMRect[];
   styled: DOMRect[];

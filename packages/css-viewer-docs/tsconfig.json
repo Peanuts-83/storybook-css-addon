@@ -6,12 +6,15 @@
     "experimentalDecorators": true,
     "incremental": false,
     "isolatedModules": true,
-    "jsx": "react",
-    "lib": ["es2020", "dom"],
-    "module": "commonjs",
+    "jsx": "react-jsx",                           // "react" anciennement
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "module": "esnext",                           // "commonjs" anciennement
+    "moduleResolution": "bundler",                   // explicite / new
     "noImplicitAny": true,
-    "rootDir": "../../",
+    "rootDir": ".",
     "skipLibCheck": true,
-    "target": "ES2020"
+    "target": "esnext",
+    "resolveJsonModule": true
   },
+  "include": ["./src/**/*" ]
 }

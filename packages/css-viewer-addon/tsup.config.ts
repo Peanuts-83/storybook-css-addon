@@ -1,33 +1,18 @@
 import { defineConfig, type Options } from "tsup";
 import { execSync } from "child_process";
-import { readFile } from "node:fs/promises";
-import { globalPackages as globalManagerPackages } from "storybook/internal/manager/globals";
-import { globalPackages as globalPreviewPackages } from "storybook/internal/preview/globals";
 
 // The current browsers supported by Storybook v7
-const BROWSER_TARGET: Options["target"] = [
-  "chrome100",
-  "safari15",
-  "firefox91",
-];
-const NODE_TARGET: Options["target"] = ["node18"];
-
-type BundlerConfig = {
-  bundler?: {
-    exportEntries?: string[];
-    nodeEntries?: string[];
-    managerEntries?: string[];
-    previewEntries?: string[];
-  };
-};
+const BROWSER_TARGET: Options["target"] = "esnext";
+const NODE_TARGET: Options["target"] = "node20.19";
 
 export default defineConfig(async (options) => {
-  const packageJson = (await readFile("./package.json", "utf8").then(
-    JSON.parse,
-  )) as BundlerConfig;
+  // read package.json with ESM and JSON import
+  const packageJson = (await import("./package.json", {
+    with: {type:"json"}
+  })).default;
+  
   const {
     bundler: {
-      exportEntries = [],
       managerEntries = [],
       previewEntries = [],
       nodeEntries = [],
@@ -35,17 +20,28 @@ export default defineConfig(async (options) => {
   } = packageJson;
 
   const commonConfig: Options = {
-    splitting: false,
-    minify: !options.watch,
+    splitting: true,
+    format: ["esm"],
     treeshake: true,
-    sourcemap: true,
-    clean: options.watch ? false : true,
-    outDir: "./dist", 
+    sourcemap: !options.watch ? true : true,
+    // no conditionnal clean actually recommended by Storybook
+    clean: false,
+    outDir: "./dist",
+    // Packages from Storybook → DO NOT BUNDLE!
+    external:
+      [
+        "react",
+        "react-dom",
+        "@storybook/icons",
+        "storybook/manager-api",
+        "storybook/preview-api",
+        "react/jsx-runtime"
+      ],
     onSuccess: async () => {
       // Copy after build - required for demo project
       try {
-        execSync("cp -r ./dist ../../", { stdio: "inherit" });
-        console.log("cp done : ./dist -> ../../dist");
+        // execSync("cp -r ./dist ../../", { stdio: "inherit" });
+        // console.log("cp done : ./dist -> ../../dist");
       } catch (error) {
         console.error("cp error :", error);
       }
@@ -54,23 +50,6 @@ export default defineConfig(async (options) => {
 
   const configs: Options[] = [];
 
-  // export entries are entries meant to be manually imported by the user
-  // they are not meant to be loaded by the manager or preview
-  // they'll be usable in both node and browser environments, depending on which features and modules they depend on
-  if (exportEntries.length) {
-    configs.push({
-      ...commonConfig,
-      entry: exportEntries,
-      dts: {
-        resolve: true,
-      },
-      format: ["esm", "cjs"],
-      target: [...BROWSER_TARGET, ...NODE_TARGET],
-      platform: "neutral",
-      external: [...globalManagerPackages, ...globalPreviewPackages],
-    });
-  }
-
   // manager entries are entries meant to be loaded into the manager UI
   // they'll have manager-specific packages externalized and they won't be usable in node
   // they won't have types generated for them as they're usually loaded automatically by Storybook
@@ -78,10 +57,8 @@ export default defineConfig(async (options) => {
     configs.push({
       ...commonConfig,
       entry: managerEntries,
-      format: ["esm"],
       target: BROWSER_TARGET,
       platform: "browser",
-      external: globalManagerPackages,
     });
   }
 
@@ -92,13 +69,9 @@ export default defineConfig(async (options) => {
     configs.push({
       ...commonConfig,
       entry: previewEntries,
-      dts: {
-        resolve: true,
-      },
-      format: ["esm", "cjs"],
       target: BROWSER_TARGET,
       platform: "browser",
-      external: globalPreviewPackages,
+      dts: true               // types for index/preview
     });
   }
 
@@ -109,7 +82,6 @@ export default defineConfig(async (options) => {
     configs.push({
       ...commonConfig,
       entry: nodeEntries,
-      format: ["cjs"],
       target: NODE_TARGET,
       platform: "node",
     });
