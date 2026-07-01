@@ -25,17 +25,16 @@ const config: StorybookConfig = {
         }
       },
       // addon-docs fix for import from file:/// >> not ESM compatible
-      resolve: {
-        alias: [
-          {
-            // ⬇ match any addon-docs/dist/mdx-react-shim.js
-            find: /@storybook\/addon-docs\/dist\/mdx-react-shim\.js$/,
-            // ⬇ replace with clean sub-path exported
-            replacement: '@storybook/addon-docs/mdx-react-shim',
-          },
-        ],
-
-      }
+      // resolve: {
+      //   alias: [
+      //     {
+      //       // ⬇ match any addon-docs/dist/mdx-react-shim.js
+      //       find: /@storybook\/addon-docs\/dist\/mdx-react-shim\.js$/,
+      //       // ⬇ replace with clean sub-path exported
+      //       replacement: '@storybook/addon-docs/mdx-react-shim',
+      //     },
+      //   ],
+      // }
     });
   },
 };

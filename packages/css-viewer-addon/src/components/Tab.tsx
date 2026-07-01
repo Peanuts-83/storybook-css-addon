@@ -10,7 +10,7 @@ interface TabProps {
 }
 
 const TabWrapper = styled.div(({ theme }) => ({
-  background: theme.background.content,
+  background: theme?.background?.content || 'transparent',
   minHeight: "100vh",
   boxSizing: "border-box",
   position: "absolute",
@@ -36,8 +36,9 @@ export const Tab: React.FC<TabProps> = ({active}) => {
   }, [cvc, storyId])
   
   let cssContent = useCssViewer(active, storyId, config); // Get style
-  
+
   if (!active || config?.ignore?.some(e => storyId.includes(e))) {
+    console.error('[ERROR] active :' + active + ' / ignore :' + config?.ignore)
     return null;
   }
 

@@ -1,55 +1,22 @@
 {
-  "name": "@storybook/addon-css-viewer",
-  "version": "10.0.0-alpha1",
+  "name": "storybook-addon-css-viewer-workspace",
   "description": "Display css/less file content linked to story's component in a TAB.",
   "private": true,
   "workspaces": [
     "packages/css-viewer-addon",
     "packages/css-viewer-docs"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Peanuts-83/storybook-css-addon.git"
-  },
-  "resolveJsonModule": true,
   "type": "module",
-  "license": "MIT",
   "author": "thomas ranque <tranque@free.fr>",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    },
-    "./preview": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/preview.js"
-    },
-    "./constant": {
-      "types": "./dist/index.d.ts",
-      "default": "./src/constants.ts"
-    },
-    "./preset": "./dist/preset.js",
-    "./manager": "./dist/manager.js",
-    "./package.json": "./package.json"
-  },
-  "files": [
-    "dist/**/*",
-    "README.md",
-    "*.js",
-    "*.d.ts"
-  ],
   "scripts": {
     "clean": "rm -rf dist",
     "build": "yarn run addon:build",
     "watch": "yarn run build && yarn run docs:start",
+    "publish": "cd packages/css-viewer-addon && npm publish",
     "test": "echo \"Error: no test specified\" && exit 1",
     "addon:build": "cd packages/css-viewer-addon/ && tsup",
     "docs:build": "yarn workspace css-viewer-docs run build-storybook",
     "docs:start": "yarn workspace css-viewer-docs run storybook"
-  },
-  "dependencies": {
-    "@storybook/icons": "^1.2.10",
-    "styled-components": "^6.1.17"
   },
   "devDependencies": {
     "@storybook/addon-docs": "^10.0.0",
