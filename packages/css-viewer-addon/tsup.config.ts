@@ -23,19 +23,21 @@ export default defineConfig(async (options) => {
     splitting: true,
     format: ["esm"],
     treeshake: true,
+    dts: true,
     sourcemap: !options.watch ? true : true,
     // no conditionnal clean actually recommended by Storybook
     clean: false,
     outDir: "./dist",
+    entry: { 
+      index: 'src/index.ts', 
+      manager: 'src/manager.tsx', 
+      preview: 'src/preview.ts', 
+      preset: 'src/preset.ts'
+    },
     // Packages from Storybook → DO NOT BUNDLE!
     external:
       [
-        "react",
-        "react-dom",
-        "@storybook/icons",
-        "storybook/manager-api",
-        "storybook/preview-api",
-        "react/jsx-runtime"
+        'react', 'react-dom', 'react/jsx-runtime', 'storybook', 'storybook/manager-api', 'storybook/preview-api', 'storybook/theming', 'storybook/internal/components'
       ],
     onSuccess: async () => {
       // Copy after build - required for demo project

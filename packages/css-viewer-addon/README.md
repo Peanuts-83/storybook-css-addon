@@ -78,6 +78,15 @@ Please note **debugMode** (activable from config) is here to help you fit the ri
   </div>
 </div>
 
+## Publish addon
+
+Doit se faire depuis le root de l'addon, et non depuis le root du projet.
+Penser a mettre en adéquation les numéros de version dans les package.json root et addon.
+
+```bash
+npm publish
+```
+
 ## Credentials
 
 [**Peanuts-83** aka Thomas RANQUE](https://github.com/Peanuts-83)<br>
