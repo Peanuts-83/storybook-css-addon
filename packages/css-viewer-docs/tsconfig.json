@@ -6,10 +6,10 @@
     "experimentalDecorators": true,
     "incremental": false,
     "isolatedModules": true,
-    "jsx": "react-jsx",                           // "react" anciennement
+    "jsx": "react-jsx",                             // "react" anciennement
     "lib": ["esnext", "dom", "dom.iterable"],
-    "module": "esnext",                           // "commonjs" anciennement
-    "moduleResolution": "bundler",                   // explicite / new
+    "module": "esnext",                             // "commonjs" anciennement
+    "moduleResolution": "bundler",                  // explicite / new
     "noImplicitAny": true,
     "rootDir": ".",
     "skipLibCheck": true,

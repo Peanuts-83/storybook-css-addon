@@ -1,30 +1,27 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { Code } from "storybook/internal/components";
 import { useParameter, useStorybookState } from "storybook/manager-api";
 import { styled } from "storybook/theming";
 import { useCssViewer } from '../hooks/useCssViewer';
-import { CssViewerConfig } from 'src/types';
+import { CssViewerConfig } from '../types';
 
-interface TabProps {
+interface PanelProps {
   active: boolean;
 }
 
-const TabWrapper = styled.div(({ theme }) => ({
-  background: theme?.background?.content || 'transparent',
-  minHeight: "100vh",
-  boxSizing: "border-box",
-  position: "absolute",
-  top: 0,
+const PanelWrapper = styled.div(({ theme }) => ({
+  background: theme?.background?.content || 'transparent', 
+  minHeight: '100%', 
+  boxSizing: 'border-box', 
+  padding: 16, 
+  overflow: 'auto'
 }));
 
-const TabInner = styled.div({
-  maxWidth: 768,
-  marginLeft: "auto",
-  marginRight: "auto",
-  marginTop: "4rem"
+const PanelInner = styled.div({
+  width: '100%'
 });
 
-export const Tab: React.FC<TabProps> = ({active}) => {
+export const Panel: React.FC<PanelProps> = ({active}) => {
   const { storyId } = useStorybookState(); // Get active story ID  
   const [config, setConfig] = useState<CssViewerConfig|null>(null)
   const cvc: CssViewerConfig = useParameter("cssViewerConfig")
@@ -42,15 +39,24 @@ export const Tab: React.FC<TabProps> = ({active}) => {
     return null;
   }
 
+  const cssText =
+    typeof cssContent === 'string'
+      ? cssContent
+      : cssContent == null
+        ? ''
+        : React.isValidElement(cssContent)
+          ? '[ERROR] cssContent is a React element, expected string'
+          : String(cssContent);
+
   return (
-    <TabWrapper>
-      <TabInner>
-        {cssContent ? (
-          <Code>{cssContent}</Code>
+    <PanelWrapper>
+      <PanelInner>
+        {cssText ? (
+          <Code>{cssText}</Code>
         ) : (
           <p>No style available for this story.</p>
         )}
-      </TabInner>
-    </TabWrapper>
+      </PanelInner>
+    </PanelWrapper>
   );
 };

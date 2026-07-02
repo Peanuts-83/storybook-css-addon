@@ -896,9 +896,8 @@
   resolved "https://verdaccio.emedisys.fr/@rollup/rollup-win32-x64-msvc/-/rollup-win32-x64-msvc-4.60.1.tgz#23b860113e9f87eea015d1fa3a4240a52b42fcd4"
   integrity sha512-lWMnixq/QzxyhTV6NjQJ4SFo1J6PvOX8vUx5Wb4bBPsEb+8xZ89Bz6kOXpfXj9ak9AHTQVQzlgzBEc1SyM27xQ==
 
-"@storybook/addon-css-viewer@./storybook-addon-css-viewer-v10.0.0-beta4.tgz":
-  version "10.0.0-beta4"
-  resolved "./storybook-addon-css-viewer-v10.0.0-beta4.tgz#53d32f3041513c200307bb62987b9ec49c3017cf"
+"@storybook/addon-css-viewer@file:packages/css-viewer-addon":
+  version "10.0.2"
   dependencies:
     "@storybook/icons" "^1.2.10"
     styled-components "^6.1.17"
