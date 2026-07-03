@@ -10,11 +10,10 @@
   "author": "thomas ranque <tranque@free.fr>",
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "yarn run addon:build",
-    "watch": "yarn run build && yarn run docs:start",
-    "publish": "cd packages/css-viewer-addon && npm publish",
+    "watch": "yarn run addon:build && yarn run docs:start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "addon:build": "cd packages/css-viewer-addon/ && tsup",
+    "addon:publish": "cd packages/css-viewer-addon/ && npm publish",
     "docs:build": "yarn workspace css-viewer-docs run build-storybook",
     "docs:start": "yarn workspace css-viewer-docs run storybook"
   },

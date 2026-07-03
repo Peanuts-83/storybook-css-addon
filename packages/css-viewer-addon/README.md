@@ -78,14 +78,23 @@ Please note **debugMode** (activable from config) is here to help you fit the ri
   </div>
 </div>
 
-## Publish addon
+## Build & Publish addon
 
-Doit se faire depuis le root de l'addon, et non depuis le root du projet.
-Penser a mettre en adéquation les numéros de version dans les package.json root et addon.
+Build and Publish must be done from addon's root, not workspace's root. Anyway, workspace's package.json contain scripts to manage it if you prefer.
 
 ```bash
-npm publish
+yarn addon:build    // -> cd packages/css-viewer-addon && tsup
+yarn  addon:publish // -> cd packages/css-viewer-addon && npm publish
 ```
+
+## Versions
+
+| Addon | Storybook | Project exposed |
+|:-------|:---------|:----------------|
+| 8.x | 8.x | Angular 15/17 OR React 18 |
+| 10.0.3+ | 10.x | Angular 18+ OR React 18/19 | 
+
+In case of a project documented based on angular 18+, force **react** and **react-dom** versions to match addon's react version (18.3.x for addon 10.0.3+ currently) in your devDependencies. The reason is addon's peerDependecies seem not to be respected by angular, loading by default react 19.x versions which causes mismatch error.
 
 ## Credentials
 
